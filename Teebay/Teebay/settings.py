@@ -82,6 +82,19 @@ DATABASES = {
 }
 
 
+#MySQL didn't work for some reason, that's why using sqlite
+# DATABASE = {
+#     'default': {
+#             'ENGINE': 'django.db.backends.mysql',
+#             'NAME': 'teebay',
+#             'HOST': 'localhost',
+#             'USER': 'root',
+#             'PASSWORD': '',
+#             'PORT': '3306',
+#     }
+# }
+
+
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
