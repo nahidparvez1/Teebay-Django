@@ -1,13 +1,12 @@
-from distutils.command.upload import upload
-from email.mime import image
-from email.policy import default
-from enum import auto
-from fileinput import filename
-from pydoc import describe
-from tkinter.tix import Tree
-from unicodedata import category, name
+# from distutils.command.upload import upload
+# from email.mime import image
+# from email.policy import default
+# from enum import auto
+# from fileinput import filename
+# from pydoc import describe
+# from tkinter.tix import Tree
+# from unicodedata import category, name
 from django.db import models
-
 import datetime
 import os
 
@@ -17,9 +16,8 @@ import os
 def get_file_path(request, filename):
     original_filename = filename
     nowTime = datetime.datetime.now().strftime('%Y%m%d%H:%M:%S')
-    filename = "%s%s" % (nowTime.original_filename)
+    filename = "%s%s" % (nowTime, original_filename)
     return os.path.join('uploads/', filename)
-
 
 class Category(models.Model):
     slug = models.CharField(max_length=150, null=False, blank=False)
@@ -29,7 +27,8 @@ class Category(models.Model):
     status = models.BooleanField(default=False, help_text="0=default, 1=Hidden")
     trending = models.BooleanField(default=False, help_text="0=default, 1=Trending")
     meta_title = models.CharField(max_length=150, null=False, blank=False)
-    meta_keywords = models.TextField(max_length=500, null=False, blank=False)
+    meta_keywords = models.TextField(max_length=150, null=False, blank=False)
+    meta_description = models.TextField(default=False, max_length=500, null=False, blank=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -51,7 +50,7 @@ class Product(models.Model):
     tag = models.CharField(max_length=150, null=False, blank=False)
     meta_title = models.CharField(max_length=150, null=False, blank=False)
     meta_keywords = models.TextField(max_length=150, null=False, blank=False)
-    meta_description = models.TextField(max_length=500, null=False, blank=False)
+    meta_description = models.TextField(default=False, max_length=500, null=False, blank=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
